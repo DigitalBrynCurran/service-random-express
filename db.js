@@ -2,12 +2,12 @@ const { v4: uuidv4 } = require('uuid');
 
 let db = [
     {
-        id: 0,
+        id: uuidv4(),
         name: "Derek Peters",
         age: 37,
     },
     {
-        id: 1,
+        id: uuidv4(),
         name: "Colin Summers",
         age: 57,
     }
@@ -18,23 +18,15 @@ const get = () => {
 };
 
 const getById = (id) => {
-    if (!id) return;
-
-    const data = db.find(item => item.id === Number(id));
+    const data = db.find(item => item.id === id);
 
     return data;
 };
 
 const add = (item) => {
-    console.log(item)
-    if (!item || item === {}) return;
-    const { name } = item;
-
-    if (!name) return;
-
     const newItem = {
-        ...item,
-        id: uuidv4()
+        id: uuidv4(),
+        ...item
     }
 
     db.push(newItem);
@@ -43,9 +35,7 @@ const add = (item) => {
 }
 
 const remove = (id) => {
-    if (!id) return;
-
-    const data = db.filter(item => item.id !== Number(id));
+    const data = db.filter(item => item.id !== id);
 
     db = data;
 

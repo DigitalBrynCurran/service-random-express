@@ -1,10 +1,10 @@
 const express = require('express');
 var router = express.Router();
-const db = require('./db');
+const service = require('./services');
 const { response } = require('./utils');
 
 router.get('/', (req, res) => {
-  const data = db.get();
+  const data = service.get();
 
   if (data == null) {
     res.status('404');
@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   const id = req.params.id;
 
-  const data = db.getById(id);
+  const data = service.getById(id);
 
   if (data == null) {
     res.status('404');
@@ -38,7 +38,7 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   const request = req.body;
 
-  const data = db.add(request);
+  const data = service.add(request);
 
   if (data == null) {
     res.status('500');
@@ -55,7 +55,7 @@ router.post('/', (req, res) => {
 router.delete('/:id', (req, res) => {
   const id = req.params.id;
 
-  const data = db.remove(id);
+  const data = service.remove(id);
 
   if (data == null) {
     res.status('404');
